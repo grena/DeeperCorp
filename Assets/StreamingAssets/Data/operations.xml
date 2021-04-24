@@ -1,0 +1,36 @@
+<root>
+    <operation maxDepth="3">
+        <name>Unattended garden</name>
+        <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam beatae consequatur cumque eius eligendi expedita impedit inventore iusto molestiae nam natus nihil nostrum perspiciatis quaerat, repellendus saepe tempore, voluptate voluptates.</description>
+        <dig>MED</dig>
+        <reward caps="LOW" roots="MED" />
+    </operation>
+
+    <operation>
+        <name>Isolated vegetable</name>
+        <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet cumque distinctio doloremque ea eum eveniet expedita iste iure laboriosam modi numquam odio, officia reprehenderit repudiandae saepe sint tenetur ullam.</description>
+        <dig>LOW</dig>
+        <reward roots="LOW" />
+    </operation>
+
+    <operation maxDepth="12">
+        <name>Oak root</name>
+        <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet cumque distinctio doloremque ea eum eveniet expedita iste iure laboriosam modi numquam odio, officia reprehenderit repudiandae saepe sint tenetur ullam.</description>
+        <dig>MED</dig>
+        <reward roots="HIGH" />
+    </operation>
+
+    <operation>
+        <name>Wooden box</name>
+        <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet cumque distinctio doloremque ea eum eveniet expedita iste iure laboriosam modi numquam odio, officia reprehenderit repudiandae saepe sint tenetur ullam.</description>
+        <dig>HIGH</dig>
+        <reward caps="HIGH" />
+    </operation>
+
+    <operation minDepth="5">
+        <name>Unidentified skeleton</name>
+        <description>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium amet cumque distinctio doloremque ea eum eveniet expedita iste iure laboriosam modi numquam odio, officia reprehenderit repudiandae saepe sint tenetur ullam.</description>
+        <dig>MED</dig>
+        <reward caps="HIGH" />
+    </operation>
+</root>
