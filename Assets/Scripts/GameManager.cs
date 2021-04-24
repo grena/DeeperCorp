@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Core;
 using UnityEngine;
 
@@ -7,7 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Singleton => _singleton;
     
     public Stock Stock;
-    public RefOperationLoader RefOperationLoader;
+    public RunningOperationCreator RunningOperationCreator;
+    public List<RunningOperation> RunningOperations = new List<RunningOperation>();
     
     private void Awake()
     {
@@ -25,8 +27,12 @@ public class GameManager : MonoBehaviour
     
     private void Initialize()
     {
-        RefOperationLoader = new RefOperationLoader();
-        RefOperationLoader.LoadData();
+        RunningOperationCreator = new RunningOperationCreator();
+
+        for (int i = 0; i < 5; i++)
+        {
+            RunningOperations.Add(RunningOperationCreator.Create(1));
+        }
         
         Stock = new Stock()
         {
