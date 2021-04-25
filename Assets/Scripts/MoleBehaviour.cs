@@ -34,7 +34,7 @@ public class MoleBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     // Update is called once per frame
     void Update()
     {
-        float speed = 0.1f;
+        float speed = 0.2f;
         // Move our position a step closer to the target.
 
 
