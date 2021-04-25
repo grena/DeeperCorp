@@ -10182,7 +10182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Sell 15        for
+  m_text: Sell 30        for
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 996939e6149478f478b76e36894f7d09, type: 2}
   m_sharedMaterial: {fileID: -658233942616080778, guid: 996939e6149478f478b76e36894f7d09, type: 2}
@@ -10503,13 +10503,13 @@ MonoBehaviour:
   textMasterUpgradeCost: {fileID: 1602477061}
   textMasterUpgradeTotal: {fileID: 79010327}
   buttonClose: {fileID: 336944501921407109}
-  digCost: 6
+  digCost: 5
   digAmount: 5
-  atqCost: 8
+  atqCost: 10
   atqAmount: 5
-  defCost: 10
+  defCost: 8
   defAmount: 5
-  masterCost: 30
+  masterCost: 25
   masterAmount: 1
 --- !u!225 &1666816362
 CanvasGroup:
@@ -11035,7 +11035,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5
+  m_text: 10
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 996939e6149478f478b76e36894f7d09, type: 2}
   m_sharedMaterial: {fileID: -658233942616080778, guid: 996939e6149478f478b76e36894f7d09, type: 2}
@@ -12255,7 +12255,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -44.9, y: 0}
-  m_SizeDelta: {x: 73.34, y: 18.42}
+  m_SizeDelta: {x: 76.47, y: 18.42}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1980721214
 MonoBehaviour:

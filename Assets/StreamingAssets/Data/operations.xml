@@ -13,6 +13,13 @@
         <reward roots="LOW" />
     </operation>
 
+    <operation maxDepth="10">
+        <name>Field mouse nest</name>
+        <description>They're not here... we could help ourselves.</description>
+        <dig>LOW</dig>
+        <reward roots="LOW" />
+    </operation>
+
     <operation maxDepth="12">
         <name>Oak root</name>
         <description>The deep roots of an oak tree. They are so tender and tasty, the colony would be thrilled if we brought this back!</description>
@@ -27,9 +34,37 @@
         <reward caps="HIGH" />
     </operation>
 
-    <operation minDepth="5">
+    <operation minDepth="4">
         <name>Unidentified skeleton</name>
         <description>A skeleton... but of what? We could dig it up and sell it, that would surely bring us some caps.</description>
+        <dig>MED</dig>
+        <reward caps="HIGH" />
+    </operation>
+
+    <operation maxDepth="3">
+        <name>Rotten tomato</name>
+        <description>It's rotten... but it will still make a little food.</description>
+        <dig>LOW</dig>
+        <reward roots="LOW" />
+    </operation>
+
+    <operation minDepth="3">
+        <name>Exotic roots</name>
+        <description>We've never seen roots like this around here... they must be delicious!</description>
+        <dig>MED</dig>
+        <reward roots="HIGH" />
+    </operation>
+
+    <operation minDepth="2">
+        <name>Can of food</name>
+        <description>It is full! And the metal that surrounds it will surely serve the colony. Opening it will be difficult.</description>
+        <dig>HIGH</dig>
+        <reward caps="MED" roots="HIGH" />
+    </operation>
+
+    <operation minDepth="4">
+        <name>Rusty machine</name>
+        <description>Wow, it doesn't work anymore, but it must be worth a lot to the colony.</description>
         <dig>MED</dig>
         <reward caps="HIGH" />
     </operation>

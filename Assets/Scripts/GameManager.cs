@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
             Stock.Roots -= 1;
             consumedFood += 1;
 
-            if (consumedFood % 30 == 0)
+            if (consumedFood % 20 == 0)
             {
                 // NEW BABY!
                 Stock.Pop += 1;
