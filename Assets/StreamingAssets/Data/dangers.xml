@@ -1,0 +1,21 @@
+<root>
+    <danger maxDepth="10" level="HIGH">sharpened glass</danger>
+    <danger level="MED">risk of landslide</danger>
+    <danger level="LOW">irritating walls</danger>
+    <danger level="LOW">water pocket</danger>
+    <danger minDepth="15" level="MED">toxic rock</danger>
+    <danger level="HIGH">cutting rock</danger>
+    <danger level="NONE">soft rock</danger>
+    <danger level="MED">sticky *thing*</danger>
+    <danger level="NONE">gravel</danger>
+    <danger level="MED">iron bits</danger>
+    <danger level="LOW">plastic bits</danger>
+    <danger minDepth="30" level="HIGH">shrapnel</danger>
+    <danger level="NONE">soft dirt</danger>
+    <danger level="NONE">sand</danger>
+    <danger level="MED">quicksand</danger>
+    <danger level="MED">leaking battery</danger>
+    <danger level="LOW">broken bulb</danger>
+    <danger level="LOW">spines</danger>
+    <danger level="LOW">spines</danger>
+</root>

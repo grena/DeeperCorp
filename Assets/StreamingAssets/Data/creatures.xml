@@ -1,0 +1,18 @@
+<root>
+    <creature maxDepth="5" level="LOW">baby spiders</creature>
+    <creature maxDepth="8" level="LOW">sleepy rabbit</creature>
+    <creature maxDepth="8" level="MED">angry rabbit</creature>
+    <creature level="NONE">earthworm</creature>
+    <creature level="MED">spider</creature>
+    <creature level="HIGH">poisonous spider</creature>
+    <creature level="HIGH">scorpion</creature>
+    <creature level="MED">dying scorpion</creature>
+    <creature level="NONE">ant</creature>
+    <creature level="LOW">colony of ants</creature>
+    <creature level="NONE">maggot</creature>
+    <creature level="LOW">mouse</creature>
+    <creature level="MED">aggressive mouse</creature>
+    <creature level="NONE">insect</creature>
+    <creature level="LOW">stinging insect</creature>
+    <creature level="MED">poisonous insect</creature>
+</root>
