@@ -2373,7 +2373,7 @@ GameObject:
   - component: {fileID: 771802987}
   - component: {fileID: 771802986}
   m_Layer: 5
-  m_Name: Text_Remaining
+  m_Name: Text_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3175,6 +3175,8 @@ GameObject:
   - component: {fileID: 1171832255}
   - component: {fileID: 1171832257}
   - component: {fileID: 1171832256}
+  - component: {fileID: 1171832258}
+  - component: {fileID: 1171832259}
   m_Layer: 5
   m_Name: Panel_Details
   m_TagString: Untagged
@@ -3244,6 +3246,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171832254}
   m_CullTransparentMesh: 1
+--- !u!114 &1171832258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171832254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e04872567445b4497a5006586a01ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1171832259}
+  textDescription: {fileID: 1443138566}
+  textDig: {fileID: 1522757362}
+  sliderDig: {fileID: 469366616}
+  textAtq: {fileID: 771802986}
+  textDef: {fileID: 1819291816}
+  textRewardCaps: {fileID: 1959825621}
+  textRewardRoots: {fileID: 218138897}
+--- !u!225 &1171832259
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171832254}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &1216785677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4071,7 +4105,7 @@ GameObject:
   - component: {fileID: 1522757363}
   - component: {fileID: 1522757362}
   m_Layer: 5
-  m_Name: Text_Remaining
+  m_Name: Text_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4855,7 +4889,7 @@ GameObject:
   - component: {fileID: 1819291817}
   - component: {fileID: 1819291816}
   m_Layer: 5
-  m_Name: Text_Remaining
+  m_Name: Text_Value
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
