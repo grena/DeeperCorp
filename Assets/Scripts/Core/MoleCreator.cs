@@ -31,16 +31,16 @@ namespace Core
             
             Mole mole = new Mole
             {
-                Dig = Mathf.CeilToInt(Random.Range(4, 7) * digBonus),
-                Atq = Mathf.CeilToInt(Random.Range(0, 3) * atqBonus),
-                Def = Mathf.CeilToInt(Random.Range(0, 3) * defBonus),
+                Dig = Mathf.CeilToInt(Random.Range(3f, 8f) * digBonus),
+                Atq = Mathf.CeilToInt(Random.Range(0f, 2f) * atqBonus),
+                Def = Mathf.CeilToInt(Random.Range(0f, 2f) * defBonus),
                 masterLevel = masterLevel,
                 Sprite = sprites.Shuffle().Shuffle().Shuffle().First()
             };
             
             if (masterFields.Contains("dig")) mole.Dig = mole.Dig * 3;
-            if (masterFields.Contains("atq")) mole.Atq = (mole.Atq + 1) * 3;
-            if (masterFields.Contains("def")) mole.Def = (mole.Def + 1) * 3;
+            if (masterFields.Contains("atq")) mole.Atq = mole.Atq * 3;
+            if (masterFields.Contains("def")) mole.Def = mole.Def * 3;
 
             return mole;
         }

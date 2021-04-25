@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] private OperationResultBehaviour operationResultBehaviour;
+    [SerializeField] private GameObject buttonSellRoots;
 
     public Stock Stock;
     public RunningOperationCreator RunningOperationCreator;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     public Action<RunningOperation> OnOperationFinished;
     public Action<RunningOperation> OnOperationRemoved;
     public Action OnGameOver;
+    public Action OnGameStarts;
 
     public RunningOperation LaunchedOperation;
     public MoleBehaviour LaunchedMole;
@@ -47,6 +49,7 @@ public class GameManager : MonoBehaviour
     public int consumedFood = 0;
     public int sentMoles = 0;
     public bool isGameOver = false;
+    public bool isGameStarted = false;
     
     private void Awake()
     {
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (!isGameStarted) return;
         if (isGameOver) return;
         
         if (Time.time > nextTickRoots)
@@ -108,6 +112,12 @@ public class GameManager : MonoBehaviour
     public void RelaunchGame()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void StartGame()
+    {
+        isGameStarted = true;
+        OnGameStarts?.Invoke();
     }
 
     private void OnLaunchedMoleInside()
@@ -166,10 +176,28 @@ public class GameManager : MonoBehaviour
         
         Stock = new Stock()
         {
-            Caps = 100,
-            Roots = 15,
+            Caps = 150,
+            Roots = 120,
             Pop = 25,
         };
+        
+        Stock.OnStockUpdated += OnStockUpdated;
+    }
+
+    private void OnStockUpdated()
+    {
+        buttonSellRoots.SetActive(Stock.Caps < 5 && GetComponent<MolesManager>().moleBehaviours.Count == 0);
+    }
+
+    public void SellRoots()
+    {
+        if (Stock.Roots > 30)
+        {
+            Stock.Roots -= 30;
+            Stock.Caps += 10;
+            
+            buttonSellRoots.SetActive(false);
+        }
     }
 
     private void OnOperationReported()

@@ -51,8 +51,8 @@ public class OperationResultBehaviour : MonoBehaviour
         if (mole.Def < operation.DefChallenge.RequiredValue)
         {
             float roll = Random.Range(0f, 1f);
-            float successRange = mole.Def / operation.DefChallenge.RequiredValue;
-
+            float successRange = (float) mole.Def / operation.DefChallenge.RequiredValue;
+            
             defSuccess = roll < successRange;
         }
 
@@ -61,8 +61,8 @@ public class OperationResultBehaviour : MonoBehaviour
             if (mole.Atq < operation.AtqChallenge.RequiredValue)
             {
                 float roll = Random.Range(0f, 1f);
-                float successRange = mole.Atq / operation.AtqChallenge.RequiredValue;
-
+                float successRange = (float) mole.Atq / operation.AtqChallenge.RequiredValue;
+                
                 atqSuccess = roll < successRange;
             }
         }
@@ -71,14 +71,14 @@ public class OperationResultBehaviour : MonoBehaviour
         {
             digResult = atqSuccess 
                 ? mole.Dig 
-                : Mathf.FloorToInt(mole.Atq / operation.AtqChallenge.RequiredValue * mole.Dig); // Embarassed by creature, digged less than expected
+                : Mathf.FloorToInt((float) mole.Atq / operation.AtqChallenge.RequiredValue * mole.Dig); // Embarassed by creature, digged less than expected
         }
         else
         {
             // Burried! We'll have to dig more next time.
             digResult = -Mathf.FloorToInt(0.5f * mole.Dig);
         }
-
+        
         newOperationDig = Mathf.Clamp(_operation.Dig + digResult, 0, operation.DigTotal);
         
         ///////// NOW DISPLAY TO PLAYER

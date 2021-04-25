@@ -64,8 +64,7 @@ public class MoleBehaviour : MonoBehaviour
 
     void Start()
     {
-        // _speed = Random.Range(0.13f, 0.2f);
-        _speed = 1;
+        _speed = Random.Range(0.5f, 0.9f);
         canvasGroup.alpha = 0;
         
         posBord = GameObject.Find("MolesPositions/PositionBord").transform;

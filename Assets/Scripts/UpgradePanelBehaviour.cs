@@ -27,16 +27,16 @@ public class UpgradePanelBehaviour : MonoBehaviour
     [SerializeField] private Button buttonClose;
 
 
-    public int digCost = 10;
+    public int digCost = 5;
     public int digAmount = 5;
     
-    public int atqCost = 15;
+    public int atqCost = 7;
     public int atqAmount = 5;
     
-    public int defCost = 20;
+    public int defCost = 9;
     public int defAmount = 5;
     
-    public int masterCost = 50;
+    public int masterCost = 25;
     public int masterAmount = 1;
 
     private void Awake()

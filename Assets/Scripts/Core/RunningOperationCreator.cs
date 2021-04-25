@@ -121,7 +121,7 @@ namespace Core
         {
             if (string.IsNullOrEmpty(level)) return 0;
             
-            int caps = 10 + (2 * depth);
+            int caps = 20 + (2 * depth);
 
             if (level == "LOW") caps = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * caps); // +5% ~ +15%
             if (level == "MED") caps = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * caps); // +20% ~ +45%
@@ -134,7 +134,7 @@ namespace Core
         {
             if (string.IsNullOrEmpty(level)) return 0;
             
-            int roots = 100 + (2 * depth);
+            int roots = 60 + (2 * depth);
 
             if (level == "LOW") roots = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * roots); // +5% ~ +15%
             if (level == "MED") roots = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * roots); // +20% ~ +45%
