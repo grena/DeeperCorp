@@ -119,6 +119,8 @@ public class OperationResultBehaviour : MonoBehaviour
         yield return new WaitForSeconds(time);
  
         objDef.SetActive(true);
+        
+        SoundManager.singleton.Play(SoundManager.Sounds.SfxBlipResult);
     }
     
     IEnumerator RevealDefResult(float time, bool success)
@@ -128,6 +130,8 @@ public class OperationResultBehaviour : MonoBehaviour
         textDefResult.text = success ? "RESISTED!" : "DEAD!";
         textDefResult.color = success ? new Color32(0xE0, 0x90 , 0x12, 0xFF) : new Color32(0x7A, 0x39, 0x21, 0xFF);
         textDefResult.gameObject.SetActive(true);
+        
+        SoundManager.singleton.Play(success ? SoundManager.Sounds.SfxBlipResultValueSuccess : SoundManager.Sounds.SfxBlipResultValueFail);
     }
     
     IEnumerator RevealAtq(float time)
@@ -135,6 +139,8 @@ public class OperationResultBehaviour : MonoBehaviour
         yield return new WaitForSeconds(time);
  
         objAtq.SetActive(true);
+        
+        SoundManager.singleton.Play(SoundManager.Sounds.SfxBlipResult);
     }
     
     IEnumerator RevealAtqResult(float time, bool success)
@@ -144,6 +150,8 @@ public class OperationResultBehaviour : MonoBehaviour
         textAtqResult.text = success ? "PASSED!" : "FAILED!";
         textAtqResult.color = success ? new Color32(0xE0, 0x90 , 0x12, 0xFF) : new Color32(0x7A, 0x39, 0x21, 0xFF);
         textAtqResult.gameObject.SetActive(true);
+        
+        SoundManager.singleton.Play(success ? SoundManager.Sounds.SfxBlipResultValueSuccess : SoundManager.Sounds.SfxBlipResultValueFail);
     }
     
     IEnumerator RevealDig(float time)
@@ -157,10 +165,19 @@ public class OperationResultBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         
+        int previousVal = 0;
+        
         LeanTween.value(gameObject, _operation.Dig, newDigValue, 0.8f).setEaseLinear().setOnUpdate((float val) =>
         {
             sliderDig.value = val;
             textDig.text = $"{Mathf.CeilToInt(val)}/{_operation.DigTotal}";
+
+            if (previousVal != Mathf.CeilToInt(val))
+            {
+                SoundManager.singleton.Play(SoundManager.Sounds.SfxFillDig);
+                previousVal = Mathf.CeilToInt(val);
+            }
+            
         }).setOnComplete(() =>
         {
             _operation.Dig = newDigValue;
@@ -170,6 +187,7 @@ public class OperationResultBehaviour : MonoBehaviour
             if (_operation.Dig == _operation.DigTotal)
             {
                 GameManager.Singleton.FinishOperation(_operation);
+                SoundManager.singleton.Play(SoundManager.Sounds.SfxSuccessOperation);
             }
         });
  
