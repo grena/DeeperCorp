@@ -26,7 +26,7 @@ namespace Core
 
             Mole mole = new Mole
             {
-                Dig = Random.Range(2, 6 + 1),
+                Dig = Random.Range(20, 6 + 1),
                 Atq = Random.Range(0, 2 + 1),
                 Def = Random.Range(0, 2 + 1),
                 masterLevel = masterLevel,

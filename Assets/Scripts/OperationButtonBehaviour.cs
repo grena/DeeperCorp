@@ -8,6 +8,7 @@ public class OperationButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPo
 {
     [SerializeField] private TMP_Text textName;
     [SerializeField] private TMP_Text textDepth;
+    [SerializeField] private Button button;
 
     public RunningOperation operation;
 
@@ -17,6 +18,19 @@ public class OperationButtonBehaviour : MonoBehaviour, IPointerEnterHandler, IPo
 
         textName.text = operation.Name;
         textDepth.text = $"{operation.Depth} meters";
+        
+        button.onClick.AddListener(() => GameManager.Singleton.LaunchMole(operation));
+        
+        GameManager.Singleton.OnOperationFinished += OnOperationFinished;
+        GameManager.Singleton.OnOperationRemoved += OnOperationFinished;
+    }
+
+    private void OnOperationFinished(RunningOperation op)
+    {
+        if (op == operation)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

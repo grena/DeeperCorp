@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Core;
 using UnityEngine;
 
@@ -18,12 +19,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField] private OperationResultBehaviour operationResultBehaviour;
+
     public Stock Stock;
     public RunningOperationCreator RunningOperationCreator;
     public List<RunningOperation> RunningOperations = new List<RunningOperation>();
     public RunningOperation _hoveredOperation;
 
     public Action<RunningOperation> OnOperationHovered;
+    public Action<RunningOperation> OnOperationLaunched;
+    public Action<RunningOperation> OnOperationAdded;
+    public Action<RunningOperation> OnOperationFinished;
+    public Action<RunningOperation> OnOperationRemoved;
+
+    public RunningOperation LaunchedOperation;
+    public MoleBehaviour LaunchedMole;
+
+    public int currentDepth = 0;
     
     private void Awake()
     {
@@ -38,22 +50,84 @@ public class GameManager : MonoBehaviour
         
         Initialize();
     }
-    
+
+    public void LaunchMole(RunningOperation operation)
+    {
+        MoleBehaviour moleBehaviour =
+            GetComponent<MolesManager>().moleBehaviours.First(behaviour => behaviour.linePosition == 1);
+
+        LaunchedMole = moleBehaviour;
+        LaunchedOperation = operation;
+        
+        LaunchedMole.LetsDig();
+        LaunchedMole.OnInside += OnLaunchedMoleInside;
+        
+        OnOperationLaunched?.Invoke(operation);
+    }
+
+    private void OnLaunchedMoleInside()
+    {
+        operationResultBehaviour.Display(LaunchedOperation, LaunchedMole.mole);
+    }
+
+    public void FinishOperation(RunningOperation operation)
+    {
+        Stock.Caps += operation.CapsReward;
+        Stock.Roots += operation.RootsReward;
+
+        if (operation.CapsReward == 0 && operation.RootsReward == 0)
+        {
+            // GO DEEPER !
+            GoDeeper();
+        }
+
+        RunningOperations.Remove(operation);
+        
+        OnOperationFinished?.Invoke(operation);
+    }
+
+    public void GoDeeper()
+    {
+        currentDepth++;
+
+        foreach (RunningOperation runningOperation in RunningOperations)
+        {
+            OnOperationRemoved?.Invoke(runningOperation);
+        }
+        
+        RunningOperations.Clear();
+        
+        for (int i = 0; i < 4; i++)
+        {
+            RunningOperation op = RunningOperationCreator.Create(currentDepth);
+            RunningOperations.Add(op);
+            OnOperationAdded?.Invoke(op);
+        }
+
+        RunningOperation opDeeper = RunningOperationCreator.CreateDeeper(currentDepth + 1);
+        RunningOperations.Add(opDeeper);
+        OnOperationAdded?.Invoke(opDeeper);
+    }
+
     private void Initialize()
     {
         RunningOperationCreator = new RunningOperationCreator();
-
-        for (int i = 0; i < 4; i++)
-        {
-            RunningOperations.Add(RunningOperationCreator.Create(1));
-        }
         
-        RunningOperations.Add(RunningOperationCreator.CreateDeeper(2));
+        RunningOperation opDeeper = RunningOperationCreator.CreateDeeper(currentDepth + 1);
+        RunningOperations.Add(opDeeper);
+        OnOperationAdded?.Invoke(opDeeper);
+        
+        operationResultBehaviour.OnReported += OnOperationReported;
         
         Stock = new Stock()
         {
             Caps = 100,
             Roots = 100,
         };
+    }
+
+    private void OnOperationReported()
+    {
+        GetComponent<MolesManager>().EndExpedition();
     }
 }

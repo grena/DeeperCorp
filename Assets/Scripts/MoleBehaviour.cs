@@ -5,8 +5,9 @@ using Core;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Random = UnityEngine.Random;
 
-public class MoleBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MoleBehaviour : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -14,15 +15,61 @@ public class MoleBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [SerializeField] private TMP_Text textAtq;
     [SerializeField] private TMP_Text textDef;
     [SerializeField] private List<GameObject> iconsMasterLevel;
+
+    private bool _ready;
+    private bool _inside;
     
     public int linePosition = 5;
 
     private Dictionary<int, Transform> linePositions = new Dictionary<int, Transform>();
-    public Mole mole;
+    private Transform posBord;
+    private Transform posInside;
     
+    public Mole mole;
+    public Action OnReady;
+    public Action OnInside;
+
+    private float _speed;
+
+    public string finalMove = "";
+    
+    public bool Ready
+    {
+        get => _ready;
+        set
+        {
+            _ready = value;
+            
+            if (_ready)
+            {
+                ToggleStats(true);
+                OnReady?.Invoke();
+            }
+        }
+    }
+
+    public bool Inside
+    {
+        get => _inside;
+        set
+        {
+            _inside = value;
+            
+            if (_inside)
+            {
+                OnInside?.Invoke();
+            }
+        }
+    }
+
     void Start()
     {
+        // _speed = Random.Range(0.13f, 0.2f);
+        _speed = 1;
         canvasGroup.alpha = 0;
+        
+        posBord = GameObject.Find("MolesPositions/PositionBord").transform;
+        posInside = GameObject.Find("MolesPositions/PositionInside").transform;
         
         linePositions[1] = GameObject.Find("MolesPositions/Position 1").transform;
         linePositions[2] = GameObject.Find("MolesPositions/Position 2").transform;
@@ -34,15 +81,56 @@ public class MoleBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     // Update is called once per frame
     void Update()
     {
-        float speed = 0.2f;
-        // Move our position a step closer to the target.
+        switch (finalMove)
+        {
+            case "bord":
+            {
+                if (Vector3.Distance(transform.position, posBord.position) > 0.001f)
+                {
+                    float step = _speed * Time.deltaTime; // calculate distance to move
+                    transform.position = Vector3.MoveTowards(transform.position, posBord.position, step);
+                }
+                else
+                {
+                    finalMove = "inside";
+                }
 
+                return;
+            }
+            case "inside":
+            {
+                if (Vector3.Distance(transform.position, posInside.position) > 0.001f)
+                {
+                    float step = _speed * Time.deltaTime; // calculate distance to move
+                    transform.position = Vector3.MoveTowards(transform.position, posInside.position, step);
+                }
+                else
+                {
+                    if (!Inside) Inside = true;
+                }
+
+                return;
+            }
+        }
 
         if (Vector3.Distance(transform.position, linePositions[linePosition].position) > 0.001f)
         {
-            float step =  speed * Time.deltaTime; // calculate distance to move
+            float step = _speed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, linePositions[linePosition].position, step);
         }
+        else
+        {
+            if (linePosition == 1 && !Ready)
+            {
+                Ready = true;    
+            }
+        }
+    }
+
+    public void LetsDig()
+    {
+        ToggleStats(false);
+        finalMove = "bord";
     }
 
     public void Setup(Mole m)
@@ -67,21 +155,20 @@ public class MoleBehaviour : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void OnMouseEnter()
     {
-        canvasGroup.alpha = 1;
+        if (Ready) return;
+        
+        ToggleStats(true);
     }
 
     private void OnMouseExit()
     {
-        canvasGroup.alpha = 0;
+        if (Ready) return;
+        
+        ToggleStats(false);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    private void ToggleStats(bool visible)
     {
-        canvasGroup.alpha = 1;
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        canvasGroup.alpha = 0;
+        canvasGroup.alpha = visible ? 1 : 0;
     }
 }

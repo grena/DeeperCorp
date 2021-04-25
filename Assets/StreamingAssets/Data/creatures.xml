@@ -1,7 +1,7 @@
 <root>
     <creature maxDepth="5" level="LOW">baby spiders</creature>
-    <creature maxDepth="8" level="LOW">sleepy rabbit</creature>
-    <creature maxDepth="8" level="MED">angry rabbit</creature>
+    <creature minDepth="1" maxDepth="8" level="LOW">sleepy rabbit</creature>
+    <creature minDepth="3" maxDepth="8" level="MED">angry rabbit</creature>
     <creature level="NONE">earthworm</creature>
     <creature level="MED">spider</creature>
     <creature level="HIGH">poisonous spider</creature>

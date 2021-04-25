@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Core;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,8 +13,9 @@ public class MolesManager : MonoBehaviour
     [SerializeField] private Transform transformSpawn;
     [SerializeField] private Button recruitButton;
     [SerializeField] private List<Sprite> moleSprites;
+    [SerializeField] private OperationListBehaviour operationListBehaviour;
 
-    private List<MoleBehaviour> _moleBehaviours = new List<MoleBehaviour>();
+    public List<MoleBehaviour> moleBehaviours = new List<MoleBehaviour>();
     private MoleCreator _moleCreator = new MoleCreator();
 
     private void Start()
@@ -32,10 +34,32 @@ public class MolesManager : MonoBehaviour
         
         MoleBehaviour moleBehaviour = moleObj.GetComponent<MoleBehaviour>();
         moleBehaviour.Setup(mole);
-        moleBehaviour.linePosition = _moleBehaviours.Count + 1;
+        moleBehaviour.linePosition = moleBehaviours.Count + 1;
+        moleBehaviour.OnReady += OnMoleReady;
 
-        _moleBehaviours.Add(moleBehaviour);
+        moleBehaviours.Add(moleBehaviour);
 
-        recruitButton.interactable = _moleBehaviours.Count < 5;
+        recruitButton.interactable = moleBehaviours.Count < 5;
+    }
+
+    public void EndExpedition()
+    {
+        // Remove mole behaviour 1
+        MoleBehaviour launchedMole = moleBehaviours.First(behaviour => behaviour.linePosition == 1);
+        moleBehaviours.Remove(launchedMole);
+        Destroy(launchedMole.gameObject);
+
+        // Advance all other ones
+        foreach (MoleBehaviour moleBehaviour in moleBehaviours)
+        {
+            moleBehaviour.linePosition--;
+        }
+        
+        recruitButton.interactable = moleBehaviours.Count < 5;
+    }
+
+    private void OnMoleReady()
+    {
+        operationListBehaviour.ToggleVisibility(true);
     }
 }

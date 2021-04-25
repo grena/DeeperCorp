@@ -57,7 +57,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: 370521161
   m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &624153719021592327
@@ -929,6 +929,7 @@ MonoBehaviour:
   - {fileID: 4557828306352429729}
   - {fileID: 2387411961775802144}
   linePosition: 0
+  finalMove: 
 --- !u!61 &1105854774693185301
 BoxCollider2D:
   m_ObjectHideFlags: 0
