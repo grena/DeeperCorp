@@ -35,6 +35,11 @@ public class GameManager : MonoBehaviour
     public RunningOperation LaunchedOperation;
     public MoleBehaviour LaunchedMole;
 
+    public float UpgradeDigTotal = 0;
+    public float UpgradeAtqTotal = 0;
+    public float UpgradeDefTotal = 0;
+    public float UpgradeMasterTotal = 0;
+
     public int currentDepth = 0;
     
     private void Awake()

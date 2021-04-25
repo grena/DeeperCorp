@@ -71,7 +71,7 @@ public class OperationResultBehaviour : MonoBehaviour
         {
             digResult = atqSuccess 
                 ? mole.Dig 
-                : Mathf.FloorToInt(0.3f * mole.Dig); // Embarassed by creature, digged less than expected
+                : Mathf.FloorToInt(mole.Atq / operation.AtqChallenge.RequiredValue * mole.Dig); // Embarassed by creature, digged less than expected
         }
         else
         {
