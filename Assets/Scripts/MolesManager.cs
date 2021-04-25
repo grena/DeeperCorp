@@ -25,7 +25,11 @@ public class MolesManager : MonoBehaviour
 
     public void RecruitMole()
     {
-        GameManager.Singleton.Stock.Caps -= 5;
+        int cost = 5;
+
+        if (GameManager.Singleton.Stock.Caps < cost) return;
+        
+        GameManager.Singleton.Stock.Caps -= cost;
 
         Mole mole = _moleCreator.Create();
 

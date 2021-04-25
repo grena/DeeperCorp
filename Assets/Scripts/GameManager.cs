@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Core;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public Action<RunningOperation> OnOperationAdded;
     public Action<RunningOperation> OnOperationFinished;
     public Action<RunningOperation> OnOperationRemoved;
+    public Action OnGameOver;
 
     public RunningOperation LaunchedOperation;
     public MoleBehaviour LaunchedMole;
@@ -41,9 +43,10 @@ public class GameManager : MonoBehaviour
     public float UpgradeMasterTotal = 0;
 
     public int currentDepth = 0;
-
     public float nextTickRoots = 0;
     public int consumedFood = 0;
+    public int sentMoles = 0;
+    public bool isGameOver = false;
     
     private void Awake()
     {
@@ -61,8 +64,18 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (isGameOver) return;
+        
         if (Time.time > nextTickRoots)
         {
+            if (Stock.Roots == 0)
+            {
+                isGameOver = true;
+                OnGameOver?.Invoke();
+                
+                return;
+            }
+            
             Stock.Roots -= 1;
             consumedFood += 1;
 
@@ -78,6 +91,8 @@ public class GameManager : MonoBehaviour
 
     public void LaunchMole(RunningOperation operation)
     {
+        sentMoles++;
+        
         MoleBehaviour moleBehaviour =
             GetComponent<MolesManager>().moleBehaviours.First(behaviour => behaviour.linePosition == 1);
 
@@ -88,6 +103,11 @@ public class GameManager : MonoBehaviour
         LaunchedMole.OnInside += OnLaunchedMoleInside;
         
         OnOperationLaunched?.Invoke(operation);
+    }
+
+    public void RelaunchGame()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 
     private void OnLaunchedMoleInside()
@@ -105,7 +125,7 @@ public class GameManager : MonoBehaviour
             // GO DEEPER !
             GoDeeper();
         }
-
+        
         RunningOperations.Remove(operation);
         
         OnOperationFinished?.Invoke(operation);
@@ -147,7 +167,7 @@ public class GameManager : MonoBehaviour
         Stock = new Stock()
         {
             Caps = 100,
-            Roots = 100,
+            Roots = 15,
             Pop = 25,
         };
     }
