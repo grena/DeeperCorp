@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 3; i++)
         {
-            RunningOperations.Add(RunningOperationCreator.Create(12));
+            RunningOperations.Add(RunningOperationCreator.Create(1));
         }
         
         Stock = new Stock()

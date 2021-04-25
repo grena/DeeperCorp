@@ -19,6 +19,7 @@ public class OperationDetailsBehaviour : MonoBehaviour
     private void Start()
     {
         GameManager.Singleton.OnOperationHovered += OnOperationHovered;
+        canvasGroup.alpha = 0;
     }
 
     private void OnOperationHovered(RunningOperation op)
