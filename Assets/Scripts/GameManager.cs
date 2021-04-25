@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     public float UpgradeMasterTotal = 0;
 
     public int currentDepth = 0;
+
+    public float nextTickRoots = 0;
+    public int consumedFood = 0;
     
     private void Awake()
     {
@@ -54,6 +57,23 @@ public class GameManager : MonoBehaviour
         }
         
         Initialize();
+    }
+
+    private void Update()
+    {
+        if (Time.time > nextTickRoots)
+        {
+            Stock.Roots -= 1;
+            consumedFood += 1;
+
+            if (consumedFood % 30 == 0)
+            {
+                // NEW BABY!
+                Stock.Pop += 1;
+            }
+
+            nextTickRoots = Time.time + Stock.Pop * 0.04f;
+        }
     }
 
     public void LaunchMole(RunningOperation operation)
@@ -128,6 +148,7 @@ public class GameManager : MonoBehaviour
         {
             Caps = 100,
             Roots = 100,
+            Pop = 25,
         };
     }
 

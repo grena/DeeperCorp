@@ -6,6 +6,7 @@ namespace Core
     {
         private int _caps;
         private int _roots;
+        private int _pop;
 
         public int Caps
         {
@@ -23,6 +24,16 @@ namespace Core
             set
             {
                 _roots = value;
+                OnStockUpdated?.Invoke();
+            }
+        }
+        
+        public int Pop
+        {
+            get => _pop;
+            set
+            {
+                _pop = value;
                 OnStockUpdated?.Invoke();
             }
         }
