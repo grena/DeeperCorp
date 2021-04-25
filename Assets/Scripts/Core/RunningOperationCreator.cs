@@ -33,6 +33,25 @@ namespace Core
             return runningOp;
         }
 
+        public RunningOperation CreateDeeper(int depth)
+        {
+            RunningOperation runningOp = new RunningOperation();
+            runningOp.Name = "GO DEEPER.";
+            runningOp.Description = "By going DEEPER, we'll find new expeditions with more resources. Go DEEPER, go BETTER, Deeper CORP.\n\nCAUTION !!! This will replace all available expeditions.";
+            runningOp.Depth = depth;
+
+            runningOp.Dig = 0;
+            runningOp.DigTotal = GetDig(depth, "HIGH");
+            
+            runningOp.AtqChallenge = new AtqChallenge();
+            runningOp.DefChallenge = new DefChallenge();
+            
+            runningOp.CapsReward = 0;
+            runningOp.RootsReward = 0;
+
+            return runningOp;
+        }
+
         private int GetDig(int depth, string level)
         {
             int dig = 6 + (2 * depth);

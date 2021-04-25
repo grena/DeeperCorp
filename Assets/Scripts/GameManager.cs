@@ -43,10 +43,12 @@ public class GameManager : MonoBehaviour
     {
         RunningOperationCreator = new RunningOperationCreator();
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 4; i++)
         {
             RunningOperations.Add(RunningOperationCreator.Create(1));
         }
+        
+        RunningOperations.Add(RunningOperationCreator.CreateDeeper(2));
         
         Stock = new Stock()
         {
