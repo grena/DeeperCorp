@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     public int currentDepth = 0;
     public float nextTickRoots = 0;
+    public int totalConsumedFood = 0;
     public int consumedFood = 0;
     public int sentMoles = 0;
     public bool isGameOver = false;
@@ -72,24 +73,28 @@ public class GameManager : MonoBehaviour
         
         if (Time.time > nextTickRoots)
         {
-            if (Stock.Roots == 0)
+            if (Stock.Roots <= 0)
             {
                 isGameOver = true;
                 OnGameOver?.Invoke();
                 
                 return;
             }
-            
-            Stock.Roots -= 1;
-            consumedFood += 1;
 
-            if (consumedFood % 20 == 0)
+            int consumption = Mathf.CeilToInt(Stock.Pop * 0.04f);
+            
+            Stock.Roots -= consumption;
+            consumedFood += consumption;
+            totalConsumedFood += consumption;
+
+            if (consumedFood >= 20)
             {
                 // NEW BABY!
-                Stock.Pop += 1;
+                Stock.Pop += consumedFood / 20;
+                consumedFood %= 20;
             }
 
-            nextTickRoots = Time.time + Mathf.Max(0.1f, 2 - (Stock.Pop * 0.02f));
+            nextTickRoots = Time.time + 1;
         }
     }
 
@@ -177,8 +182,8 @@ public class GameManager : MonoBehaviour
         Stock = new Stock()
         {
             Caps = 150,
-            Roots = 120,
-            Pop = 25,
+            Roots = 300,
+            Pop = 5,
         };
         
         Stock.OnStockUpdated += OnStockUpdated;

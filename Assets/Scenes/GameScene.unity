@@ -2313,7 +2313,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 855ef57c1384b624eac7e225c1a8d1e3, type: 3}
+  m_audioClip: {fileID: 8300000, guid: ffb1a317acb75bc43a6ab9df832448e7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -11264,7 +11264,7 @@ MonoBehaviour:
   atqAmount: 10
   defCost: 10
   defAmount: 10
-  masterCost: 25
+  masterCost: 50
   masterAmount: 1
 --- !u!225 &1666816362
 CanvasGroup:
@@ -12552,6 +12552,7 @@ MonoBehaviour:
   UpgradeMasterTotal: 0
   currentDepth: 0
   nextTickRoots: 0
+  totalConsumedFood: 0
   consumedFood: 0
   sentMoles: 0
   isGameOver: 0

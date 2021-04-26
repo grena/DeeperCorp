@@ -29,7 +29,7 @@ public class GameOverBehaviour : MonoBehaviour
         textDeepestExpedition.text = $"{GameManager.Singleton.currentDepth} meters";
         textSentMoles.text = $"{GameManager.Singleton.sentMoles}";
         textPopulationReached.text = $"{GameManager.Singleton.Stock.Pop}";
-        textRootsConsumed.text = $"{GameManager.Singleton.consumedFood}";
+        textRootsConsumed.text = $"{GameManager.Singleton.totalConsumedFood}";
 
         ToggleVisibility(true);
     }

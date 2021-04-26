@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using UnityEngine;
 using Utils;
@@ -17,49 +17,47 @@ namespace Core
         public void LoadData()
         {
             // LOAD OPERATIONS
-            string roomSchemasPath = Path.Combine(Application.streamingAssetsPath, "Data");
-            var files = Directory.GetFiles(roomSchemasPath, "operations.xml");
+            // if your original XML file is located at
+            // "Ressources/MyXMLFile.xml"
+            TextAsset textAsset = (TextAsset) Resources.Load("Data/operations");  
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(textAsset.text);
+            XElement xFileContent = XElement.Load(xmldoc.DocumentElement.CreateNavigator().ReadSubtree());
             
-            foreach (string filePath in files)
+            var operations = xFileContent.Elements("operation").ToList();
+            
+            foreach (XElement e in operations)
             {
-                XElement xFileContent = XElement.Load(filePath);
-                var operations = xFileContent.Elements("operation").ToList();
-                
-                foreach (XElement e in operations)
-                {
-                    RefOperation refOp = RefOperation.FromXml(e);
-                    RefOperations.Add(refOp);
-                }
+                RefOperation refOp = RefOperation.FromXml(e);
+                RefOperations.Add(refOp);
             }
             
             // LOAD ATQ CHALLENGES
-            files = Directory.GetFiles(roomSchemasPath, "creatures.xml");
+            textAsset = (TextAsset) Resources.Load("Data/creatures");  
+            xmldoc = new XmlDocument();
+            xmldoc.LoadXml(textAsset.text);
+            xFileContent = XElement.Load(xmldoc.DocumentElement.CreateNavigator().ReadSubtree());
             
-            foreach (string filePath in files)
+            var creatures = xFileContent.Elements("creature").ToList();
+            
+            foreach (XElement e in creatures)
             {
-                XElement xFileContent = XElement.Load(filePath);
-                var creatures = xFileContent.Elements("creature").ToList();
-                
-                foreach (XElement e in creatures)
-                {
-                    RefAtq refAtq = RefAtq.FromXml(e);
-                    RefAtqs.Add(refAtq);
-                }
+                RefAtq refAtq = RefAtq.FromXml(e);
+                RefAtqs.Add(refAtq);
             }
             
             // LOAD DEF CHALLENGES
-            files = Directory.GetFiles(roomSchemasPath, "dangers.xml");
+            textAsset = (TextAsset) Resources.Load("Data/dangers");  
+            xmldoc = new XmlDocument();
+            xmldoc.LoadXml(textAsset.text);
+            xFileContent = XElement.Load(xmldoc.DocumentElement.CreateNavigator().ReadSubtree());
             
-            foreach (string filePath in files)
+            var dangers = xFileContent.Elements("danger").ToList();
+            
+            foreach (XElement e in dangers)
             {
-                XElement xFileContent = XElement.Load(filePath);
-                var dangers = xFileContent.Elements("danger").ToList();
-                
-                foreach (XElement e in dangers)
-                {
-                    RefDef refAtq = RefDef.FromXml(e);
-                    RefDefs.Add(refAtq);
-                }
+                RefDef refAtq = RefDef.FromXml(e);
+                RefDefs.Add(refAtq);
             }
         }
 
