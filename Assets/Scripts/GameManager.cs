@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
 
     private void OnStockUpdated()
     {
-        buttonSellRoots.SetActive(Stock.Caps < 5 && GetComponent<MolesManager>().moleBehaviours.Count == 0);
+        buttonSellRoots.SetActive(Stock.Roots > 30);
     }
 
     public void SellRoots()
@@ -195,8 +195,6 @@ public class GameManager : MonoBehaviour
         {
             Stock.Roots -= 30;
             Stock.Caps += 10;
-            
-            buttonSellRoots.SetActive(false);
         }
     }
 
