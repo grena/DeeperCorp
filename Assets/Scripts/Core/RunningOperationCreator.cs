@@ -71,7 +71,9 @@ namespace Core
         {
             if (level == "NONE") return 0;
 
-            int atq = 0 + depth;
+            float atqBase = 1;
+            float percentPerDepth = 50;
+            int atq = Mathf.FloorToInt(atqBase + percentPerDepth * depth * atqBase / 100);
             
             if (level == "LOW") atq = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * atq); // +5% ~ +15%
             if (level == "MED") atq = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * atq); // +20% ~ +45%
@@ -97,7 +99,9 @@ namespace Core
         {
             if (level == "NONE") return 0;
 
-            int def = 0 + depth;
+            float defBase = 1;
+            float percentPerDepth = 40;
+            int def = Mathf.FloorToInt(defBase + percentPerDepth * depth * defBase / 100);
             
             if (level == "LOW") def = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * def); // +5% ~ +15%
             if (level == "MED") def = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * def); // +20% ~ +45%
@@ -108,7 +112,9 @@ namespace Core
 
         private int GetDig(int depth, string level)
         {
-            int dig = 6 + (2 * depth);
+            float digBase = 6;
+            float percentPerDepth = 40;
+            int dig = Mathf.FloorToInt(digBase + percentPerDepth * depth * digBase / 100);
 
             if (level == "LOW") dig = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * dig); // +5% ~ +15%
             if (level == "MED") dig = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * dig); // +20% ~ +45%
@@ -121,8 +127,10 @@ namespace Core
         {
             if (string.IsNullOrEmpty(level)) return 0;
             
-            int caps = 20 + (2 * depth);
-
+            float capsBase = 20;
+            float percentPerDepth = 25;
+            int caps = Mathf.FloorToInt(capsBase + percentPerDepth * depth * capsBase / 100);
+            
             if (level == "LOW") caps = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * caps); // +5% ~ +15%
             if (level == "MED") caps = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * caps); // +20% ~ +45%
             if (level == "HIGH") caps = Mathf.FloorToInt(Random.Range(1.60f, 1.90f) * caps); // +60% ~ +90% 
@@ -134,8 +142,10 @@ namespace Core
         {
             if (string.IsNullOrEmpty(level)) return 0;
             
-            int roots = 60 + (2 * depth);
-
+            float rootsBase = 60;
+            float percentPerDepth = 25;
+            int roots = Mathf.FloorToInt(rootsBase + percentPerDepth * depth * rootsBase / 100);
+            
             if (level == "LOW") roots = Mathf.FloorToInt( Random.Range(1.05f, 1.15f) * roots); // +5% ~ +15%
             if (level == "MED") roots = Mathf.FloorToInt(Random.Range(1.20f, 1.45f) * roots); // +20% ~ +45%
             if (level == "HIGH") roots = Mathf.FloorToInt(Random.Range(1.60f, 1.90f) * roots); // +60% ~ +90% 
