@@ -83,13 +83,13 @@ public class GameManager : MonoBehaviour
             Stock.Roots -= 1;
             consumedFood += 1;
 
-            if (consumedFood % 15 == 0)
+            if (consumedFood % 20 == 0)
             {
                 // NEW BABY!
                 Stock.Pop += 1;
             }
 
-            nextTickRoots = Time.time + Stock.Pop * 0.04f;
+            nextTickRoots = Time.time + Mathf.Max(0.1f, 2 - (Stock.Pop * 0.02f));
         }
     }
 
