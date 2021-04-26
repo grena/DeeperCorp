@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
     public float UpgradeDigTotal = 0;
     public float UpgradeAtqTotal = 0;
     public float UpgradeDefTotal = 0;
-    public float UpgradeMasterTotal = 0;
+    public int UpgradeMasterTotal = 0;
 
     public int currentDepth = 0;
     public float nextTickRoots = 0;
@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
             Stock.Roots -= 1;
             consumedFood += 1;
 
-            if (consumedFood % 20 == 0)
+            if (consumedFood % 15 == 0)
             {
                 // NEW BABY!
                 Stock.Pop += 1;

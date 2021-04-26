@@ -11258,12 +11258,12 @@ MonoBehaviour:
   textMasterUpgradeCost: {fileID: 1602477061}
   textMasterUpgradeTotal: {fileID: 79010327}
   buttonClose: {fileID: 336944501921407109}
-  digCost: 5
-  digAmount: 5
+  digCost: 10
+  digAmount: 10
   atqCost: 10
-  atqAmount: 5
-  defCost: 8
-  defAmount: 5
+  atqAmount: 10
+  defCost: 10
+  defAmount: 10
   masterCost: 25
   masterAmount: 1
 --- !u!225 &1666816362
